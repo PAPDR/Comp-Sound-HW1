@@ -29,9 +29,9 @@ const keyboardFrequencyMap = {
 }
 
 song1 = ['73', '82', '87', '73', '82', '87'].toString(); //Song of Storms
-song2 = null;
-var songList = [song1];
-var songNameList = ["StormSong.mp3"];
+song2 =  ['89', '85', '73', '89', '85', '73'].toString(); //Eponas Song ;
+var songList = [song1, song2];
+var songNameList = ["StormSong.mp3", "EponaSong.mp3"];
 
 
 
@@ -89,12 +89,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
     function checkBufferContent(currentInput){
 
         currentBuffer = currentInput.toString();
+        console.log(currentBuffer);
         //Check to see if the current input is in the buffer
         for (let i = 0; i < songList.length; i++) {
             if(songList[i] === currentBuffer){
                 console.log("Song Match!");
                 clearBuffer();
-                playMusic();
+                playMusic(i); //Pass in the id of songlist to get correct name
             }
         }
 
@@ -182,13 +183,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
 
 
-    function playMusic(){
+    function playMusic(songID){
         
         //Stop function if the song doesn't exist
 
         //Assign audio and play it
         if(songPlaying.duration > 0 && songPlaying.paused){
-            songPlaying = new Audio('StormSong.mp3');
+            console.log(songID);
+            console.log(songNameList[songID]);
+            songPlaying = new Audio(songNameList[songID]);
             songPlaying.play();
         }
         
